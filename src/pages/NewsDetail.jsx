@@ -4,10 +4,15 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsLoading } from "../store/slices/isLoading.slice";
 import { Button, Col, Row,  Card } from "react-bootstrap";
-import { filterCategoriesThunk } from "../store/slices/news.slice";
+import { filterCategoriesThunk,getNewsThunk } from "../store/slices/news.slice";
 import Carousel from 'react-bootstrap/Carousel';
 import { createFavoritesThunk } from "../store/slices/favorite.slice";
 import { Link } from "react-router-dom";
+import {FaFileAlt} from "react-icons/fa";
+import { ImPlus} from "react-icons/im";
+import { ImMinus } from "react-icons/im";
+import { TiShoppingCart } from "react-icons/ti";
+
 
 const NewsDetail = () => {
   const { id } = useParams();
@@ -19,6 +24,8 @@ const NewsDetail = () => {
 
 
   useEffect(() => {
+    dispatch(getNewsThunk())
+   
     dispatch(setIsLoading(true));
 
     axios
@@ -57,82 +64,90 @@ navigate("/login")
     <div>
 
         <div>
-        <h5><span>MARCA:  </span>{detail?.brand}</h5>
+        <h5> Brand:  {detail?.brand}</h5>
         </div>
 
 
 <div className="container3">
-  
-<div className="cover-row">
-   <Row >
-        <Col>
-     
-        <Carousel>
 
-      <Carousel.Item style={{padding:'5rem'}}
-       
-      >
-        <div className='cover'>
-        <img
-          className="img"
-          src={detail?.images?.[0]?.url}
-          alt="First slide"
-        />
+   <Row xs={1} md={2} lg={2}>
+        <Col >
+     <div className='content2'>
+        <div>
+          
+     <Carousel>
+
+<Carousel.Item style={{padding:'5rem'}}
+ 
+>
+  <div className='cover'>
+  <img
+    className="img"
+    src={detail?.images?.[0]?.url}
+    alt="First slide"
+  />
+  </div>
+
+</Carousel.Item >
+
+<Carousel.Item style={{padding:'5rem'}} 
+
+>
+  <div className='cover'>
+  <img
+    className="img"
+    src={detail?.images?.[1]?.url}
+    alt="Second slide"
+  />
+
+  </div>
+
+</Carousel.Item>
+<Carousel.Item style={{padding:'5rem'}} 
+
+>
+<div className="cover">
+<img
+    className="img"
+    src={detail?.images?.[2]?.url}
+    alt="Third slide"
+  />
+</div>
+
+</Carousel.Item>
+</Carousel>
         </div>
-     
-      </Carousel.Item >
 
-      <Carousel.Item style={{padding:'5rem'}} 
-     
-      >
-        <div className='cover'>
-        <img
-          className="img"
-          src={detail?.images?.[1]?.url}
-          alt="Second slide"
-        />
 
-        </div>
 
-      </Carousel.Item>
-      <Carousel.Item style={{padding:'5rem'}} 
-    
-      >
-      <div className="cover">
-      <img
-          className="img"
-          src={detail?.images?.[2]?.url}
-          alt="Third slide"
-        />
-      </div>
 
-    
-      </Carousel.Item>
-    </Carousel>
+     </div>
      
         </Col>
+        <div className="cover-container">
+
+<div>
+<h1>{detail?.title}</h1>
+<p>{detail?.description}</p>
+</div>
+<div>
+  <h5>PRICE</h5>
+  <h5>{detail.price}</h5>
+</div>
+
+<div>
+ 
+<Button onClick={addToFavorite}  className='button-Ag'> Add to cart <TiShoppingCart/></Button>
+
+<Button onClick={()=>setRate(rete-1)} className='less'><ImMinus/></Button>
+{rete}
+<Button onClick={()=>setRate(rete+1)} className='more'><ImPlus/></Button>
+</div>
+
+</div>
       </Row>
-   </div>
-     
-     <div className="cover-container">
-
-     <div>
-      <h1>{detail?.title}</h1>
-      <p>{detail?.description}</p>
-      </div>
-      <div>
-        <h5>PRICE</h5>
-        <h5>{detail.price}</h5>
-      </div>
-
-     <div>
-      <Button onClick={addToFavorite}>AGREGAR A FAVORITO</Button>
-      <Button onClick={()=>setRate(rete-1)}>-</Button>
-      {rete}
-      <Button onClick={()=>setRate(rete+1)}>+</Button>
-     </div>
-
-     </div>
+  
+    
 </div>
       
     
@@ -159,8 +174,8 @@ navigate("/login")
                 <Card.Title>{newsItem.title}</Card.Title>
                 <h4>Price</h4>
                 <Card.Text>{newsItem.price}</Card.Text>
-                <Button variant="primary" as={Link} to={`/product/${newsItem.id}`}>
-                  Ver detalle
+                <Button variant="primary" as={Link} to={`/product/${newsItem.id}`} className='buttonDetail'>
+                Detail <FaFileAlt/>
                 </Button>
               </Card.Body>
             </Card>
@@ -168,6 +183,8 @@ navigate("/login")
         ))}
       </Row>
     </div>
+
+
 
     </div>
   );

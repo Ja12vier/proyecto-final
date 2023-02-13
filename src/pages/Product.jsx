@@ -1,17 +1,22 @@
 import { useSelector, useDispatch } from "react-redux";
 import {
   getNewsThunk,
-  filterCategoriesThunk
+  filterCategoriesThunk,
+  filterByTermThunk
 } from "../store/slices/news.slice";
 import { useEffect, useState } from "react";
-import { Row, Col, Button, Card } from "react-bootstrap";
+import { Row, Col, Button, Card ,InputGroup,Form} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { FaSistrix } from "react-icons/fa";
+import {FaFileAlt} from "react-icons/fa";
+
 
 const Product = () => {
   const dispatch = useDispatch();
   const news = useSelector((state) => state.news);
   const [categories, setCategories] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     dispatch(getNewsThunk());
@@ -22,19 +27,47 @@ const Product = () => {
       .catch((error) => console.error(error));
   }, []);
 
+  const filterByTerm = () => {
+    dispatch(filterByTermThunk(searchValue));
+  };
+
   return (
     <div>
-      <h1>Product</h1>
+
+    <Row>
+    <Col>
+      <InputGroup className="my-3">
+        <Form.Control
+          placeholder="Username"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+        />
+        <InputGroup.Text
+          id="basic-addon1"
+          as={Button}
+          onClick={filterByTerm}
+        >
+          <FaSistrix/>
+
+        </InputGroup.Text>
+      </InputGroup>
+    </Col>
+  </Row>
+
+      <h2>Filter by: </h2>
       {categories.map((category) => (
         <Button
           key={category.id}
-          variant="primary"
+
           onClick={() => dispatch(filterCategoriesThunk(category.id))}
+          className='buttonFilter'
         >
           {category.name}
         </Button>
       ))}
-      <Button variant="dark" onClick={() => dispatch(getNewsThunk())}>
+      <Button variant="dark" onClick={() => dispatch(getNewsThunk())} className='buttonDetail'>
         Ver todos
       </Button>
       <Row xs={1} md={2} lg={3}>
@@ -45,18 +78,23 @@ const Product = () => {
               <div className="cover1">
               <Card.Img
                 variant="top"
-                src={newsItem?.images?.[0]?.url}
+                src={newsItem?.images?.[1]?.url}
                 
-                className="cover-img"
+                className="cover-img img-wrapper"
                 
               />
+                <img src={newsItem?.images?.[0]?.url } alt="" 
+                   className="img1-wrapper"
+                  />
+                
               </div>
+            
               <Card.Body>
                 <Card.Title>{newsItem.title}</Card.Title>
                 <h4>Price</h4>
                 <Card.Text>{newsItem.price}</Card.Text>
-                <Button variant="primary" as={Link} to={`/product/${newsItem.id}`}>
-                  Ver detalle
+                <Button variant="primary" as={Link} to={`/product/${newsItem.id}`} className='buttonDetail'>
+                   Detail <FaFileAlt/>
                 </Button>
               </Card.Body>
             </Card>

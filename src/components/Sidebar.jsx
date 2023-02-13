@@ -34,7 +34,8 @@ axios.get(`https://e-commerce-api-v2.academlo.tech/api/v1/cart`, getConfig())
      
       <Offcanvas show={show} onHide={handleClose} placement={"end"}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Carrito de Compras</Offcanvas.Title>
+          <Offcanvas.Title>Shopping cart</Offcanvas.Title>
+
         </Offcanvas.Header>
         <Offcanvas.Body>
 
@@ -42,10 +43,14 @@ axios.get(`https://e-commerce-api-v2.academlo.tech/api/v1/cart`, getConfig())
          favorites.length !==0 
          ?
          favorites?.map((products)=>(
-          <h3 key={products.product?.brand}> {products?.product?.brand}</h3>
+       <div key={products?.product} className='sidebar' style={{display:'flex'}}>
+        <img src={products?.product?.images?.[0]?.url }  className='sidebar-img'alt="" style={{width:' 70px', margin:'5px 5px'}} />
+             <h3 style={{fontSize:' 10px',margin:'5px 5px'}} > {products?.product?.title}</h3>
+          <h3 style={{fontSize:'10px', margin:'0 5px'}} ><span>{products?.quantity}</span> </h3>
+       </div>
          ))
         :
-        <h3>No hay producto selecionado</h3>
+        <h3>there are no selected products</h3>
         }
        
          

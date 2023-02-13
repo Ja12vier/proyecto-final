@@ -4,7 +4,7 @@ import { setIsLoading } from "./isLoading.slice";
 
 export const newsSlice = createSlice({
   name: "news",
-  initialState: [],
+  initialState:[],
   reducers: {
     setNews: (state, action) => {
       return action.payload;
@@ -33,6 +33,16 @@ export const filterCategoriesThunk = (id) => (dispatch) => {
     .catch((error) => console.error(error))
     .finally(() => dispatch(setIsLoading(false)));
 };
+
+export const filterByTermThunk = (name) => (dispatch) => {
+  dispatch(setIsLoading(true));
+  axios
+    .get(`https://e-commerce-api-v2.academlo.tech/api/v1/products?title=${name}`)
+    .then((resp) => dispatch(setNews(resp.data)))
+    .catch((error) => console.error(error))
+    .finally(() => dispatch(setIsLoading(false)));
+};
+
 
 export const { setNews } = newsSlice.actions;
 
