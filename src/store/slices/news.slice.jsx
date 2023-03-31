@@ -16,7 +16,7 @@ export const getNewsThunk = () => (dispatch) => {
   dispatch(setIsLoading(true));
 
   axios
-    .get("https://e-commerce-api-v2.academlo.tech/api/v1/products")
+    .get("https://api-tecnologia-backend.onrender.com/api/v1/products")
     .then((resp) => dispatch(setNews(resp.data)))
     .catch((error) => console.error(error))
     .finally(() => dispatch(setIsLoading(false)));
@@ -26,7 +26,7 @@ export const filterCategoriesThunk = (id) => (dispatch) => {
   dispatch(setIsLoading(true));
 
   axios
-    .get(`https://e-commerce-api-v2.academlo.tech/api/v1/products?categoryId=${id}`)
+    .get(`https://api-tecnologia-backend.onrender.com/api/v1/products?categoryId=${id}`)
     .then((resp) => {
       dispatch(setNews(resp.data));
     })
@@ -37,7 +37,7 @@ export const filterCategoriesThunk = (id) => (dispatch) => {
 export const filterByTermThunk = (name) => (dispatch) => {
   dispatch(setIsLoading(true));
   axios
-    .get(`https://e-commerce-api-v2.academlo.tech/api/v1/products?title=${name}`)
+    .get(`https://api-tecnologia-backend.onrender.com/api/v1/products?title=${name}`)
     .then((resp) => dispatch(setNews(resp.data)))
     .catch((error) => console.error(error))
     .finally(() => dispatch(setIsLoading(false)));

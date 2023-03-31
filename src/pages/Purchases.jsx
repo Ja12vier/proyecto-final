@@ -11,7 +11,7 @@ const Favorites = () => {
 
   useEffect(()=>{
     axios
-    .get(`https://e-commerce-api-v2.academlo.tech/api/v1/purchases`,getConfig())
+    .get(`https://api-tecnologia-backend.onrender.com/api/v1/purchases`,getConfig())
     .then((resp)=>setPurchases(resp.data))
   }, [])
 

@@ -29,7 +29,7 @@ const NewsDetail = () => {
     dispatch(setIsLoading(true));
 
     axios
-      .get(`https://e-commerce-api-v2.academlo.tech/api/v1/products/${id}`)
+      .get(`https://api-tecnologia-backend.onrender.com/api/v1/products/${id}`)
       .then((resp) => {
         setDetail(resp.data)
         dispatch(filterCategoriesThunk(resp.data?.categoryId));

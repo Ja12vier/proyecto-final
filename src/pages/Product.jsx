@@ -22,7 +22,7 @@ const Product = () => {
     dispatch(getNewsThunk());
 
     axios
-      .get("https://e-commerce-api-v2.academlo.tech/api/v1/categories")
+      .get("https://api-tecnologia-backend.onrender.com/api/v1/categorys")
       .then((resp) => setCategories(resp.data))
       .catch((error) => console.error(error));
   }, []);
