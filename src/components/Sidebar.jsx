@@ -9,7 +9,7 @@ const Sidebar=({show,handleClose})=>{
   
 
   useEffect(()=>{
-axios.get(`https://e-commerce-api-v2.academlo.tech/api/v1/cart`, getConfig())
+axios.get(`https://api-tecnologia-backend.onrender.com/api/v1/carts`, getConfig())
 .then((resp)=>setFavorites(resp.data))
 .catch((error)=>console.error(error))
   },[show])
