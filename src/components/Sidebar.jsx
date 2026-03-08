@@ -9,13 +9,13 @@ const Sidebar=({show,handleClose})=>{
   
 
   useEffect(()=>{
-axios.get(`https://api-tecnologia-backend.onrender.com/api/v1/carts`, getConfig())
+axios.get(`https://ecommerceapiproduct-production.up.railway.app/api/v1/carts`, getConfig())
 .then((resp)=>setFavorites(resp.data))
 .catch((error)=>console.error(error))
   },[show])
 
   const checkoutCart=()=>{
-    axios.post(`https://api-tecnologia-backend.onrender.com/api/v1/purchases`,
+    axios.post(`https://ecommerceapiproduct-production.up.railway.app/api/v1/purchases`,
     {
       "street": "Green St. 1456",
       "colony": "Southwest",

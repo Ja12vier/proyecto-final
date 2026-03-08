@@ -29,9 +29,11 @@ const NewsDetail = () => {
     dispatch(setIsLoading(true));
 
     axios
-      .get(`https://api-tecnologia-backend.onrender.com/api/v1/products/${id}`)
+      .get(`https://ecommerceapiproduct-production.up.railway.app/api/v1/products/${id}`)
       .then((resp) => {
         setDetail(resp.data)
+        console.log(resp.data);
+        
         dispatch(filterCategoriesThunk(resp.data?.categoryId));
       })
       .catch((error) => console.error(error))
@@ -109,7 +111,8 @@ navigate("/login")
 <div className="cover">
 <img
     className="img"
-    src={detail?.images?.[2]?.url}
+    src={console.log(detail)
+    }
     alt="Third slide"
   />
 </div>

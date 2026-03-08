@@ -21,7 +21,7 @@ const Login = () => {
     };
 
     axios
-      .post("https://api-tecnologia-backend.onrender.com/api/v1/users/login", data)
+      .post("https://ecommerceapiproduct-production.up.railway.app/api/v1/users/login", data)
       .then((resp) => {
         localStorage.setItem("token", resp.data.token);
         navigate("/");

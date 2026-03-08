@@ -22,7 +22,7 @@ const Product = () => {
     dispatch(getNewsThunk());
 
     axios
-      .get("https://api-tecnologia-backend.onrender.com/api/v1/categorys")
+      .get("https://ecommerceapiproduct-production.up.railway.app/api/v1/categorys")
       .then((resp) => setCategories(resp.data))
       .catch((error) => console.error(error));
   }, []);
@@ -30,7 +30,7 @@ const Product = () => {
   const filterByTerm = () => {
     dispatch(filterByTermThunk(searchValue));
   };
-
+//newsItem.productimgs?.[1]?.url
   return (
     <div>
 
@@ -78,12 +78,12 @@ const Product = () => {
               <div className="cover1">
               <Card.Img
                 variant="top"
-                src={newsItem?.images?.[1]?.url}
+                src={newsItem.productimgs?.[1]?.url}
                 
                 className="cover-img img-wrapper"
                 
               />
-                <img src={newsItem?.images?.[0]?.url } alt="" 
+                <img src={newsItem.productimgs?.[0]?.url} alt="" 
                    className="img1-wrapper"
                   />
                 
