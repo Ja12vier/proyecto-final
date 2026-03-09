@@ -31,9 +31,7 @@ const NewsDetail = () => {
     axios
       .get(`https://ecommerceapiproduct-production.up.railway.app/api/v1/products/${id}`)
       .then((resp) => {
-        setDetail(resp.data)
-        console.log(resp.data);
-        
+        setDetail(resp.data);
         dispatch(filterCategoriesThunk(resp.data?.categoryId));
       })
       .catch((error) => console.error(error))
@@ -111,7 +109,7 @@ navigate("/login")
 <div className="cover">
 <img
     className="img"
-    src={console.log(detail)
+    src={detail?.images?.[1]?.url
     }
     alt="Third slide"
   />
@@ -165,20 +163,26 @@ navigate("/login")
         {newsRelated?.map((newsItem) => (
           <Col key={newsItem.id}>
             <Card>
-            <div className="cover1">
+              <div className="cover1">
               <Card.Img
                 variant="top"
-                src={newsItem?.images?.[0]?.url}
+                src={newsItem.productimgs?.[1]?.url}
                 
-                className="cover-img"
+                className="cover-img img-wrapper"
+                
               />
+                <img src={newsItem.productimgs?.[0]?.url} alt="" 
+                   className="img1-wrapper"
+                  />
+                
               </div>
+            
               <Card.Body>
                 <Card.Title>{newsItem.title}</Card.Title>
                 <h4>Price</h4>
                 <Card.Text>{newsItem.price}</Card.Text>
                 <Button variant="primary" as={Link} to={`/product/${newsItem.id}`} className='buttonDetail'>
-                Detail <FaFileAlt/>
+                   Detail <FaFileAlt/>
                 </Button>
               </Card.Body>
             </Card>
